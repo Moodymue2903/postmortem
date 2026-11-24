@@ -51,6 +51,10 @@ def check_gate(text):
     sentences = count_sentences(text)
     if sentences < 1 or sentences > 2:
         return "entry has %d sentences, must be 1 or 2" % sentences
+    if "\n" in text or "\r" in text:
+        return "entry must be a single line, no line breaks"
+    if any(ord(ch) < 32 for ch in text):
+        return "entry must not contain control characters"
     return None
 
 
